@@ -1,13 +1,15 @@
 int my_func(char, int, float);
 
 
-int my_func(char, int, float) {
+int my_func(char a, int b, float c) {
 	// do something
 
 	return 0;
 }
 
-void my_func1(void)
+void my_func1(a,b)
+int a;
+char b;
 {
 	return;
 
@@ -18,10 +20,21 @@ my_func2()
 }
 
 //this is my main func
-int main(int argc, char** argv) {
+int main(int argc, 
+	char** argv) {
 	int r = my_func('a', 5, 4.5);
 
-	my_func1();
+	while(1) {
+		// do some loop
+		if(true) {
+			break;
+		}
+	}
+	if(my_func1()) {
+		// do more works
+	} else {
+		// nothing to do
+	}
 
 	my_func2();
 
