@@ -1,4 +1,3 @@
-
 int my_func(char, int, float);
 
 
@@ -18,6 +17,7 @@ my_func2()
 {
 }
 
+//this is my main func
 int main(int argc, char** argv) {
 	int r = my_func('a', 5, 4.5);
 
