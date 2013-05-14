@@ -21,7 +21,17 @@ my_func2()
 int main(int argc, char** argv) {
 	int r = my_func('a', 5, 4.5);
 
-	my_func1();
+	while(1) {
+		// do some loop
+		if(true) {
+			break;
+		}
+	}
+	if(my_func1()) {
+		// do more works
+	} else {
+		// nothing to do
+	}
 
 	my_func2();
 
