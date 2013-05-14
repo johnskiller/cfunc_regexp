@@ -12,6 +12,7 @@ def loadtxt(filename):
 
 # regex group1, name group2, arguments group3
 rproc = r"((?<=[\s:~])(\w+)\s*\(([\w\s,<>\[\].=&':/*]*?)\)\s*(const)?\s*({))"
+cppwords = ['if', 'while', 'do', 'for', 'switch']
 #code = loadtxt('test.c')
 
 def func_replace(matchobj):
@@ -19,12 +20,10 @@ def func_replace(matchobj):
 
 def proc_sub():
 	code = loadtxt('test.c')
-	cppwords = ['if', 'while', 'do', 'for', 'switch']
 	print re.sub(rproc,func_replace,code)
 
 def proc_stream():
 	code = loadtxt('test.c')
-	cppwords = ['if', 'while', 'do', 'for', 'switch']
 	procs = [ [i,i.group(2), i.group(3)] for i in re.finditer(rproc, code) \
  		if i.group(2) not in cppwords]
 
@@ -32,7 +31,6 @@ def proc_stream():
 
 def proc_line():
     f=open('test.c')
-    cppwords = ['if', 'while', 'do', 'for', 'switch']
     for c in f.readlines():
         print c,
         match   = re.finditer(rproc,c)
@@ -51,7 +49,8 @@ def proc_search():
 	m=ro.search(code,pos)
 	while m:
 		print code[pos:m.end()]
-		print '\t_LOG(',m.start(),',',m.end(),', "func='+m.group(2)+'('+m.group(3)+')" );'
+		if m.group(2) not in cppwords:
+			print '\t_LOG(',m.start(),',',m.end(),', "func='+m.group(2)+'('+m.group(3)+')" );'
 		pos=m.end()
 		m=ro.search(code,pos)
 
