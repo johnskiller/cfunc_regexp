@@ -12,9 +12,17 @@ def loadtxt(filename):
 
 # regex group1, name group2, arguments group3
 rproc = r"((?<=[\s:~])(\w+)\s*\(([\w\s,<>\[\].=&':/*]*?)\)\s*(const)?\s*(?={))"
-code = loadtxt('test.c')
+#code = loadtxt('test.c')
+f=open('test.c')
 cppwords = ['if', 'while', 'do', 'for', 'switch']
-procs = [(i.group(2), i.group(3)) for i in re.finditer(rproc, code) \
- if i.group(2) not in cppwords]
+for c in f.readlines():
+	print c,
+	match   = re.finditer(rproc,c)
+	#print match
+	for i in match:
+		name = i.group(2)
+	#	print i
+		arg = i.group(3)
+		if name not in cppwords:
+			print '\t_LOG("'+ name + '","' + arg + '");',
 
-for i in procs: print i[0] + '(' + i[1] + ')'
