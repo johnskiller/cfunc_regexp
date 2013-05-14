@@ -11,7 +11,7 @@ def loadtxt(filename):
     return txt
 
 # regex group1, name group2, arguments group3
-rproc = r"((?<=[\s:~])(\w+)\s*\(([\w\s,<>\[\].=&':/*]*?)\)\s*(const)?\s*(?={))"
+rproc = r"((?<=[\s:~])(\w+)\s*\(([\w\s,<>\[\].=&':/*]*?)\)\s*(const)?\s*({))"
 #code = loadtxt('test.c')
 
 def func_replace(matchobj):
@@ -50,10 +50,12 @@ def proc_search():
 	pos = 0;
 	m=ro.search(code,pos)
 	while m:
-		print code[pos:m.start()]
+		print code[pos:m.end()]
 		print '\t_LOG(',m.start(),',',m.end(),', "func='+m.group(2)+'('+m.group(3)+')" );'
 		pos=m.end()
 		m=ro.search(code,pos)
 
+	#output rest
+	print code[pos:]
 if __name__ == '__main__':
     proc_search()
